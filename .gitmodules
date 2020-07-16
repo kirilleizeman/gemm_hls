@@ -1,3 +1,6 @@
 [submodule "powermeter"]
 	path = powermeter
 	url = https://github.com/definelicht/powermeter.git
+[submodule "hlslib"]
+	path = hlslib
+	url = https://github.com/mbaharan/hlslib.git
