@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.0)
 project(sdaccel_mm)
 
 # Target options 
-set(MM_PART_NAME "xcu250-figd2104-2L-e" CACHE STRING "Part name for HLS.")
-set(MM_DSA_NAME "xilinx_u250_xdma_201830_2" CACHE STRING "DSA string for Vitis.")
+set(MM_PART_NAME "xczu9eg-ffvb1156-2-e" CACHE STRING "Part name for HLS.")
+set(MM_DSA_NAME "zcu102_base" CACHE STRING "DSA string for Vitis.")
 set(MM_TARGET_CLOCK 200 CACHE STRING "Target clock for kernel (<=0 uses DSA default).")
 set(MM_TARGET_CLOCK_UNCERTAINTY 1.08 CACHE STRING "Clock uncertainty for HLS.")
 set(MM_TMP_DIR /tmp CACHE STRING "Temporary directory for SDx build files.")
@@ -17,6 +17,7 @@ set(MM_VITIS_FLAGS "" CACHE STRING "Extra flags for Vitis.")
 set(MM_VITIS_COMPILE_FLAGS "" CACHE STRING "Extra flags for Vitis compilation phase.")
 set(MM_VITIS_LINKER_FLAGS "" CACHE STRING "Extra flags for Vitis linking phase.")
 set(MM_POWER_METER OFF CACHE BOOL "Enable Corsair power meter for measuring power consumption with Corsair RMi power supplies.")
+set(CMAKE_SYSTEM_NAME "" CACHE BOOL "Are we cross-compiling the source code?")
 
 # Domain options
 set(MM_DATA_TYPE "float" CACHE STRING "Matrix data type.")
@@ -136,7 +137,7 @@ add_executable(PrintSpecifications src/PrintSpecifications.cpp)
 
 # Software test
 add_executable(TestSimulation test/TestSimulation.cpp)
-target_link_libraries(TestSimulation ${Vitis_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${BLAS_LIBRARIES} ${Vitis_FLOATING_POINT_LIBRARY} ${Vitis_LIBRARIES} mmkernel)
+target_link_libraries(TestSimulation ${Vitis_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${BLAS_LIBRARIES} ${Vitis_LIBRARIES} mmkernel)
 if(MM_DATA_TYPE STREQUAL "half")
   target_link_libraries(TestSimulation ${Vitis_FLOATING_POINT_LIBRARY})
 endif()

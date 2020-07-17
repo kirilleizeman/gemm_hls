@@ -216,6 +216,7 @@ int main(int argc, char **argv) {
     // Convert to single element vector
     const auto cTest = Unpack<kMemoryWidthM>(cMem);
 
+    unsigned int counter = 0;
     for (int i = 0; i < size_n; ++i) {
       for (int j = 0; j < size_m; ++j) {
         const auto testVal = make_signed<Data_t>(cTest[i * size_m + j]);
@@ -224,9 +225,13 @@ int main(int argc, char **argv) {
         if (diff / refVal > static_cast<Data_t>(1e-3)) {
           std::cerr << "Mismatch at (" << i << ", " << j << "): " << testVal
                     << " vs. " << refVal << "\n";
-          return 1;
+          counter++;
         }
       }
+    }
+    if(counter > 0){
+      std::cout << "Number of errors:" << counter << std::endl;  
+      return -1;
     }
     std::cout << "Successfully verified." << std::endl;
   }

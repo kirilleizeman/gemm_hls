@@ -27,7 +27,7 @@ static_assert(kMemoryWidthBytesM % sizeof(Data_t) == 0,
 using MemoryPackM_t = hlslib::DataPack<Data_t, kMemoryWidthM>;
 
 // Internal compute buses
-using ComputePackN_t = hlslib::DataPack<Data_t, kComputeTileSizeN>;
+using mkae ComputePackN_t = hlslib::DataPack<Data_t, kComputeTileSizeN>;
 using ComputePackM_t = hlslib::DataPack<Data_t, kComputeTileSizeM>;
 using OutputPack_t = hlslib::DataPack<Data_t, kComputeTileSizeM>;
 
